@@ -18,7 +18,7 @@ export FABRIC_CFG_PATH="${DIR}/../config"
 
 cd "${DIR}/../test-network/"
 
-docker kill cliBankOfGotham cliWayneHealth logspout || true
+docker kill cliBankOfGotham cliWayneHealth cliGothamGeneralHospital logspout || true
 ./network.sh down
 
 # remove any stopped containers

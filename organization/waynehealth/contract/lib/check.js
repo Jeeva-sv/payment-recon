@@ -14,6 +14,8 @@ const cpState = {
     ISSUED: 1,
     PAID: 2,
     REISSUED: 3,
+    VALIDATED: 4,
+    REISSUEREQUESTED: 5
 };
 
 /**
@@ -68,6 +70,14 @@ class PaymentRecon extends State {
         this.currentState = cpState.REISSUED;
     }
 
+     setReissueRequested() {
+        this.currentState = cpState.REISSUEREQUESTED;
+    }
+
+     setValidated() {
+        this.currentState = cpState.VALIDATED;
+    }
+
     isIssued() {
         return this.currentState === cpState.ISSUED;
     }
@@ -80,6 +90,13 @@ class PaymentRecon extends State {
         return this.currentState === cpState.REISSUED;
     }
 
+    isReissueRequested() {
+        return this.currentState === cpState.REISSUEREQUESTED;
+    }
+
+    isValidated() {
+        return this.currentState === cpState.VALIDATED;
+    }
     static fromBuffer(buffer) {
         return PaymentRecon.deserialize(buffer);
     }

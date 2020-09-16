@@ -73,7 +73,7 @@ async function main() {
     const issueResponse = await contract.submitTransaction(
       "queryCheck",
       "321458697879",
-      "10000000009"
+      "10000000001"
     );
     // process response
     console.log("Process issue transaction response." + issueResponse);

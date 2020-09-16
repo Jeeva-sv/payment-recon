@@ -76,10 +76,10 @@ async function main() {
       "pay",
       "Wayne Health",
       "321458697879",
-      "10000000007",
+      "10000000001",
       "PAID",
-      "2020-07-04",
-      "15000",
+      "2020-09-18",
+      "25000",
       "Bank of Gotham"
     );
     // process response

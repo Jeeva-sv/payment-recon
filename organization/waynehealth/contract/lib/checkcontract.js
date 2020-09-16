@@ -239,6 +239,122 @@ class PaymentReconContract extends Contract {
         console.log(check);
     }
 
+
+    /**
+     * Validate the check by Provider
+     *
+     * @param {Context} ctx the transaction context
+     * @param {String} issuer Check issuer
+     * @param {Integer} accountNumber bank account number
+     * @param {Integer} checkNumber check number
+     * @param {String} checkStatus status of the check
+     * @param {Integer} checkAmount check amount
+     */
+    async validate(
+        ctx,
+        issuer,
+        accountNumber,
+        checkNumber,
+        checkStatus,
+        checkAmount
+    ) {
+        console.log("inside Validate");
+        console.log("Check details before update");
+
+        // Retrieve the current check using key fields provided
+        let checkKey = PaymentRecon.makeKey([accountNumber, checkNumber]);
+        let check = await ctx.checkList.getCheck(checkKey);
+
+        // Validate check details
+        if (check.isIssued() !== true) {
+            throw new Error(
+                "Check " + checkNumber + " must be in ISSUED status "
+            );
+        }
+
+        // Moves state from ISSUED to PAID
+        if (check.isIssued()) {
+            check.setValidated();
+        }
+        console.log("Status updated as Validated");
+
+        // update the org name who change the status to Validated
+        if (check.isValidated()) {
+            check.setOwner(issuer);
+            console.log("owner has been updated");
+        } else {
+            throw new Error(
+                "Check " +
+                    checkNumber +
+                    " has not been Validated yet. Current state = " +
+                    check.getCurrentState()
+            );
+        }
+
+        // Update the paper
+        await ctx.checkList.updateCheck(check);
+        return check;
+        console.log("Check details after update");
+        console.log(check);
+    }
+
+    /**
+     * Validate the check by Provider
+     *
+     * @param {Context} ctx the transaction context
+     * @param {String} issuer Check issuer
+     * @param {Integer} accountNumber bank account number
+     * @param {Integer} checkNumber check number
+     * @param {String} checkStatus status of the check
+     * @param {Integer} checkAmount check amount
+     */
+    async reissuerequest(
+        ctx,
+        issuer,
+        accountNumber,
+        checkNumber,
+        checkStatus,
+        checkAmount
+    ) {
+        console.log("inside Reissuerequest");
+        console.log("Check details before update");
+
+        // Retrieve the current check using key fields provided
+        let checkKey = PaymentRecon.makeKey([accountNumber, checkNumber]);
+        let check = await ctx.checkList.getCheck(checkKey);
+
+        // Validate check details
+        if (check.isIssued() !== true) {
+            throw new Error(
+                "Check " + checkNumber + " must be in ISSUED status "
+            );
+        }
+
+        // Moves state from ISSUED to PAID
+        if (check.isIssued()) {
+            check.setReissueRequested();
+        }
+        console.log("Status updated as ReissueRequested");
+
+        // update the org name who changed the status to Validated
+        if (check.isReissueRequested()) {
+            check.setOwner(issuer);
+            console.log("owner has been updated");
+        } else {
+            throw new Error(
+                "Check " +
+                    checkNumber +
+                    " is not in ISSUED status. Current state = " +
+                    check.getCurrentState()
+            );
+        }
+
+        // Update the paper
+        await ctx.checkList.updateCheck(check);
+        return check;
+        console.log("Check details after update");
+        console.log(check);
+    }
     async queryAllChecks(ctx) {
         const startKey = "";
         const endKey = "";
