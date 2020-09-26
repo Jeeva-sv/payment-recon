@@ -2,6 +2,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+echo "deleting files"
+cd "/home/venkat/hyper-samp/fabric-samples/paymtrecon/organization/bankofgotham/identity/user/jeeva/wallet/"
+rm *
+cd "/home/venkat/hyper-samp/fabric-samples/paymtrecon/organization/gothamgeneralhospital/identity/user/venkat/wallet/"
+rm *
+cd "/home/venkat/hyper-samp/fabric-samples/paymtrecon/organization/waynehealth/identity/user/elayabharathi/wallet/"
+rm *
+
+cd "/home/venkat/hyper-samp/fabric-samples/paymtrecon"
+
 function _exit(){
     printf "Exiting:%s\n" "$1"
     exit -1
@@ -23,4 +33,3 @@ docker kill cliBankOfGotham cliWayneHealth cliGothamGeneralHospital logspout || 
 
 # remove any stopped containers
 docker rm $(docker ps -aq)
-

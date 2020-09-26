@@ -92,6 +92,7 @@ class querycheck extends React.Component {
                 margin="normal"
             />
             <Button variant="contained"
+                    paddingTop={3}
                     color="primary"
                     disabled={!this.props.connected}
                     className={classes.Button}

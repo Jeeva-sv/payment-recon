@@ -26,6 +26,14 @@
   background: lightgrey;
 }
 
+.Login-container{
+  box-sizing: border-box;
+  position: fixed;
+  height: 100vh;
+  width: 100vh;
+  background: lightgrey;
+}
+
 .Feed-container{
   box-sizing: border-box;
   position: fixed;

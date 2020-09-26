@@ -16,6 +16,9 @@ const styles = theme => ({
         marginRight: theme.spacing.unit,
         width: 200,
     },
+    Button: {
+        marginTop: 30
+    },
     menu: {
         width: 200,
     },
@@ -73,7 +76,7 @@ class Validate extends React.Component {
             <ThemeProvider theme = {theme}>
             <form className='Main-inside' noValidate autoComplete="off">
                 <Typography variant='body1'>
-                    Validate
+                    VALIDATE
                 </Typography>
             <TextField
                 label='Action'

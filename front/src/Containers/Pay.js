@@ -13,7 +13,10 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        widht: 200,
+        width: 200,
+    },
+    Button: {
+        marginTop: 30
     },
     menu: {
         width: 200,
@@ -133,6 +136,7 @@ class Pay extends React.Component {
                 margin="normal"
             />
             <Button variant="contained"
+                    paddingTop={3}
                     color="primary"
                     disabled={!this.props.connected}
                     className={classes.Button}

@@ -13,7 +13,10 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        widht: 200,
+        width: 200,
+    },
+    Button: {
+        marginTop: 30
     },
     menu: {
         width: 200,
@@ -62,7 +65,7 @@ class Issue extends React.Component {
 
     createHandler = () => {
         //Check form validity
-        if(!(this.state.ctx && this.state.issuer && this.state.accountNumber && this.state.checkNumber && this.state.checkStatus && this.state.issueDate && this.state.checkAmount && this.state.paidDate && this.state.reissueCheckNumber && this.state.reissueCheckDate && this.state.payeeId && this.state.payeeName && this.state.newOwner)){
+        if(!(this.state.accountNumber && this.state.checkNumber)){
             alert('All fields must contain values');
         } else {
             this.props.switchFeedHandler(1)
@@ -77,7 +80,7 @@ class Issue extends React.Component {
             <ThemeProvider theme = {theme}>
             <form className='Main-inside' noValidate autoComplete="off">
                 <Typography variant='body1'>
-                    Issuing a Paper Contract
+                    ISSUING A PAPER CONTRACT
                 </Typography>
             <TextField
                 label='Issue'

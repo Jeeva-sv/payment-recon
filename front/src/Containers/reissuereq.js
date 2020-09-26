@@ -13,7 +13,10 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        widht: 200,
+        width: 200,
+    },
+    Button: {
+        marginTop: 30,
     },
     menu: {
         width: 200,
@@ -37,7 +40,7 @@ const theme = createMuiTheme({
     }
 });
 
-class reissuereq extends React.Component {
+class Reissuereq extends React.Component {
     state = {
         ctx: null,
         issuer: null,
@@ -70,7 +73,7 @@ class reissuereq extends React.Component {
             <ThemeProvider theme = {theme}>
             <form className='Main-inside' noValidate autoComplete="off">
                 <Typography variant='body1'>
-                    PAY
+                    REISSUE REQUEST
                 </Typography>
             <TextField
                 label='pay'
@@ -128,4 +131,4 @@ class reissuereq extends React.Component {
     }
 }
 
-export default withStyles(styles)(reissuereq);
+export default withStyles(styles)(Reissuereq);

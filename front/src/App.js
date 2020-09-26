@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import Paper from '@material-ui/core/Paper';
-import Main from './Containers/Main';
-import Connected from './Containers/Connected';
-import FeedController from './Containers/FeedController';
-import Blocks from './Components/Blocks';
-
+import {
+  BrowserRouter,
+  Switch,
+  Route
+} from "react-router-dom";
+import Login from '../src/Containers/Login';
+import Landing from '../src/Containers/Landing';
+import Signup from '../src/Containers/SignUp';
 import socketIOClient from 'socket.io-client'
-
 
 class App extends Component {
 
@@ -66,20 +67,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Main-container">
-          <Main socket={this.state.socket} switchFeedHandler={this.switchFeedHandler} connected={this.state.connected}/>
+        <BrowserRouter>
+        <div>
+          {/*<div className="header">
+            <NavLink activeClassName="active" to="/login">Login</NavLink><small>(Access without token only)</small>
+            <NavLink activeClassName="active" to="/landing">Home</NavLink><small>(Access with token only)</small>
+          </div>*/}
+          <div className="content">
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/landing" component={Landing} />
+            </Switch>
+          </div>
         </div>
-        <div className="Feed-container">
-          <Paper classes={{root: "Page-container"}}>
-            <FeedController showFeed={this.state.showFeed} switchFeedHandler={this.switchFeedHandler} socket={this.state.socket}/>
-          </ Paper>
-        </div>
-        <div className="Blocks-container">  
-            <Blocks blocks={this.state.blocks}/>
-        </div>
-        <div className="Connected-button">
-          <Connected connected={this.state.connected} socketID={this.state.socket.id}/>
-        </div>
+      </BrowserRouter>
       </div>
     );
   }
