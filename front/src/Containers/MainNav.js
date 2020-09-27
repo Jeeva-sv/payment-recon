@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -53,8 +52,12 @@ const styles = theme => ({
 
 class CustomizedTabs extends React.Component {
   state = {
-    value: 0,
+    value: 0
   };
+
+  constructor(props) {
+    super(props)
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -64,7 +67,12 @@ class CustomizedTabs extends React.Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-  
+    let liTagsPagination = this.props.sectionsXml.map((element, index) => {
+      return (
+        <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={element} />
+      );
+    });
+
     return (
       <div className={classes.root}>
         <Tabs
@@ -73,26 +81,7 @@ class CustomizedTabs extends React.Component {
           classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
           centered
         >
-          <Tab
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label="validate"
-          />
-          <Tab
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label="Pay"
-          />
-          <Tab
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label="Issue"
-          />
-          <Tab
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label="Reissue"
-          />
-          <Tab
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-            label="Re-Request"
-          />
+          {liTagsPagination}
         </Tabs>
       </div>
     );

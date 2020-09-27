@@ -16,6 +16,8 @@ class Landing extends Component {
             connected: false,
             socket: socketIOClient("http://localhost:4001"),
             blocks: [],
+            loginType: '',
+            sectionsXml: []
         }
 
         this.switchFeedHandler = this.switchFeedHandler.bind(this);
@@ -29,6 +31,21 @@ class Landing extends Component {
     }
 
     componentDidMount() {
+        const loginType = JSON.parse(localStorage.getItem('USER_DTS')).loginType;
+        if(loginType === 'wayneHealth') {
+            this.setState({
+                sectionsXml: ['Issue', 'Reissue']
+            });
+        } else if(loginType === 'bankOfGotham') {
+            this.setState({
+                sectionsXml: ['Pay']
+            });
+        } else if(loginType === 'gothamGH') {
+            this.setState({
+                sectionsXml: ['Validate', 'Re-Request']
+            });
+        }
+
         this.state.socket.on('connect', () => {
             this.setState({
                 ...this.state,
@@ -62,6 +79,7 @@ class Landing extends Component {
     }
 
     logout() {
+        localStorage.clear();
         this.props.history.push("/login");
     }
 
@@ -85,7 +103,7 @@ class Landing extends Component {
                             </Button>
                         </Grid>
                     </Grid>
-                    <Main socket={this.state.socket} switchFeedHandler={this.switchFeedHandler} connected={this.state.connected} />
+                    <Main socket={this.state.socket} switchFeedHandler={this.switchFeedHandler} connected={this.state.connected} sectionsXml={this.state.sectionsXml} />
                 </div>
                 <div className="Feed-container">
                     <br></br>
